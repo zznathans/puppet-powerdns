@@ -30,7 +30,7 @@ class powerdns::repo inherits powerdns {
           $gpgkey = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial'
         }
 
-        if ($facts['os']['release']['major'] < 8) {
+        if ($facts['os']['release']['major'] < '8') {
           yumrepo { 'powertools':
             ensure     => 'present',
             descr      => 'PowerTools',
