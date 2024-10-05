@@ -30,13 +30,27 @@ class powerdns::repo inherits powerdns {
           $gpgkey = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial'
         }
 
-        yumrepo { 'powertools':
-          ensure     => 'present',
-          descr      => 'PowerTools',
-          mirrorlist => $mirrorlist,
-          enabled    => 'true',
-          gpgkey     => $gpgkey,
-          gpgcheck   => 'true',
+        if ($facts['os']['release']['major'] < 8) {
+          yumrepo { 'powertools':
+            ensure     => 'present',
+            descr      => 'PowerTools',
+            mirrorlist => $mirrorlist,
+            enabled    => 'true',
+            gpgkey     => $gpgkey,
+            gpgcheck   => 'true',
+          }
+        } else {
+          # Install CRB instead of PowerTools
+          package { 'dnf-plugins-core':
+            ensure => installed,
+          }
+
+          exec { 'enable-crb-repo':
+            command => '/usr/bin/dnf config-manager --set-enabled crb',
+            path    => ['/bin', '/usr/bin'],
+            unless  => '/usr/bin/dnf repolist enabled | grep -q crb',
+            require => Package['dnf-plugins-core'],
+          }
         }
       }
 
