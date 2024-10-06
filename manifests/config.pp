@@ -37,6 +37,25 @@ define powerdns::config (
     $notify_service  = 'pdns-recursor'
   }
 
+  # Adjust permissions only for config file
+  if $path == $powerdns::params::authoritative_config {
+    $owner = $powerdns::params::pdns_user
+    $group = $powerdns::params::pdns_group
+    $mode  = '0640'
+  } else {
+    $owner = 'root'
+    $group = 'root'
+    $mode  = '0644'
+  }
+
+  file { $path:
+    ensure => file,
+    owner  => $owner,
+    group  => $group,
+    mode   => $mode,
+    notify => Service[$notify_service],
+  }
+
   file_line { "powerdns-config-${setting}-${path}":
     ensure            => $ensure,
     path              => $path,

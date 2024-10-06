@@ -34,6 +34,8 @@ class powerdns::params {
       $recursor_dir = '/etc/pdns-recursor'
       $recursor_config = "${recursor_dir}/recursor.conf"
       $install_packages = []
+      $pdns_user = 'pdns'
+      $pdns_group = 'pdns'
     }
     'Debian': {
       $authoritative_package = 'pdns-server'
