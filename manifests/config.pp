@@ -48,14 +48,6 @@ define powerdns::config (
     $mode  = '0644'
   }
 
-  file { $path:
-    ensure => file,
-    owner  => $owner,
-    group  => $group,
-    mode   => $mode,
-    notify => Service[$notify_service],
-  }
-
   file_line { "powerdns-config-${setting}-${path}":
     ensure            => $ensure,
     path              => $path,
