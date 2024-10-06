@@ -1,8 +1,8 @@
 # powerdns::params
 class powerdns::params {
   $default_package_ensure = installed
-  $authoritative_version = '4.9.2'
-  $recursor_version = '5.1.2'
+  $authoritative_version = '4.9'
+  $recursor_version = '5.1'
 
   case $facts['os']['family'] {
     'RedHat': {
