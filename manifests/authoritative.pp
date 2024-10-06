@@ -32,6 +32,15 @@ class powerdns::authoritative (
     }
   }
 
+  if $facts['os']['family'] == 'RedHat' {
+    file { '/etc/pdns/pdns.conf':
+      ensure  => file,
+      owner   => 'pdns',
+      group   => 'pdns',
+      require => Package[$powerdns::params::authoritative_package],
+    }
+  }
+
   service { 'pdns':
     ensure  => running,
     name    => $powerdns::params::authoritative_service,
