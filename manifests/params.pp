@@ -10,12 +10,12 @@ class powerdns::params {
         '7': {
           $mysql_schema_file = '/usr/share/doc/pdns-backend-mysql-4.1.14/schema.mysql.sql'
           $pgsql_schema_file = '/usr/share/doc/pdns-backend-postgresql-4.1.14/schema.pgsql.sql'
-          $sqlite_schema_file = '/usr/share/doc/pdns-backend-sqlite-4.1.14/schema.sqlite.sql'
+          $sqlite_schema_file = '/usr/share/doc/pdns-backend-sqlite/schema.sqlite.sql'
         }
         default: {
           $mysql_schema_file = '/usr/share/doc/pdns-backend-mysql-4.8.1/schema.mysql.sql'
           $pgsql_schema_file = '/usr/share/doc/pdns-backend-postgresql-4.8.1/schema.pgsql.sql'
-          $sqlite_schema_file = '/usr/share/doc/pdns-backend-sqlite-4.8.1/schema.sqlite.sql'
+          $sqlite_schema_file = '/usr/share/doc/pdns-backend-sqlite/schema.sqlite.sql'
         }
       }
       $authoritative_package = 'pdns'
